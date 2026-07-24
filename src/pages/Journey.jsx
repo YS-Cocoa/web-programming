@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import SectionTitle from '../components/SectionTitle';
 import WorkCard from '../components/WorkCard';
 import WorkModal from '../components/WorkModal';
@@ -6,7 +7,8 @@ import { workFilters, works } from '../data/works';
 
 function Journey() {
   const [activeFilter, setActiveFilter] = useState('すべて');
-  const [selectedWork, setSelectedWork] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedWork = works.find((work) => work.id === searchParams.get('work'));
   const filteredWorks = useMemo(
     () =>
       activeFilter === 'すべて'
@@ -14,6 +16,18 @@ function Journey() {
         : works.filter((work) => work.category === activeFilter),
     [activeFilter],
   );
+
+  const openWork = (work) => {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.set('work', work.id);
+    setSearchParams(nextParams);
+  };
+
+  const closeWork = () => {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete('work');
+    setSearchParams(nextParams, { replace: true });
+  };
 
   return (
     <main>
@@ -39,14 +53,14 @@ function Journey() {
           {filteredWorks.map((work) => (
             <WorkCard
               key={work.title}
-              onSelect={setSelectedWork}
+              onSelect={openWork}
               work={work}
             />
           ))}
         </div>
         {selectedWork && (
           <WorkModal
-            onClose={() => setSelectedWork(null)}
+            onClose={closeWork}
             work={selectedWork}
           />
         )}

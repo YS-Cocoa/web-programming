@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -10,12 +10,27 @@ import Philosophy from './pages/Philosophy';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   const shellRef = useRef(null);
 
   useEffect(() => {
     const shell = shellRef.current;
     if (!shell) return undefined;
+
+    const canFollowPointer = window.matchMedia('(pointer: fine)').matches
+      && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!canFollowPointer) return undefined;
 
     const target = { x: window.innerWidth * 0.5, y: window.innerHeight * 0.5 };
     const current = { ...target };
@@ -59,6 +74,7 @@ function App() {
 
   return (
     <BrowserRouter basename="/web-programming/">
+      <ScrollToTop />
       <div className="portfolio-shell" ref={shellRef}>
         <Header />
         <Routes>

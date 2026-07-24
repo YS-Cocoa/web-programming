@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import SectionTitle from '../components/SectionTitle';
+import { profileCareer } from '../data/profile';
 import profileImage from '../assets/profile.JPG';
 
 function About() {
@@ -17,6 +18,30 @@ function About() {
             <p>論文調査や記事執筆、イラスト、市場調査など幅広い分野に手を出す。</p>
             <p>今日も、この世界のどこかで好奇心の赴くままに探究を続ける。</p>
             <Link className="text-link" to="/philosophy">よしかの哲学を知る</Link>
+            <section className="career-section" aria-labelledby="career-title">
+              <h3 id="career-title">経歴</h3>
+              <ol className="career-list">
+                {profileCareer.map((item) => (
+                  <li key={`${item.period}-${item.title}`}>
+                    <p className="career-period">{item.period}</p>
+                    <div>
+                      <h4>
+                        {item.workId ? (
+                          <Link
+                            className="career-work-link"
+                            to={`/journey?work=${item.workId}`}
+                          >
+                            {item.title}
+                          </Link>
+                        ) : (
+                          item.title
+                        )}
+                      </h4>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </section>
           </div>
         </div>
       </section>

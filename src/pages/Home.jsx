@@ -29,11 +29,12 @@ function Home() {
         </h1>
         <div className="scroll-cue" aria-hidden="true" />
         <div className="intro">
-          <p>こんにちは、よしかです。</p>
-          <p>科学と自然とアートのあいだで、「なぜ？」をかたちにするのが好きです。</p>
-          <p>実験もデザインも、プロジェクトづくりも、ぜんぶ没頭。</p>
-          <p>世界の不思議を拾い集めながら、自分なりの言葉と作品で表現しています。</p>
-          <p>このサイトは、そんな私のワクワクを集めた、世界にひとつだけのひみつきち。</p>
+          <p>こんにちは、下口慶夏（よしか）です。</p>
+          <p>科学・バイオ・AI・文章・絵・音楽。分野の境界を越え、<br />「なぜ？」と思ったことへ、好奇心の赴くままに飛び込みます。</p>
+          <p>今は酵母に関する研究と論文執筆に取り組み、<br />中学2年からバイオ系スタートアップでインターンを続けています。</p>
+          <p>世界基準を見つめながら、実験も、デザインも、プロジェクトづくりも、<br />冷静に深く没頭することを大切にしています。</p>
+          <p>そこで得た発見を自分なりの言葉や作品に変え、<br />身近な人の「やってみたい」につなげていきます。</p>
+          <p>このサイトは、その探究と制作の過程を集めた、よしかのひみつきちです。</p>
           <p>よかったら、のぞいていってください。</p>
         </div>
 
@@ -77,7 +78,7 @@ function Home() {
               ))}
             </div>
           </div>
-          <Link className="text-link align-end" to="/journey">モノづくりを見る</Link>
+          <Link className="text-link align-end" to="/journey">もっと見る</Link>
         </section>
         {selectedWork && (
           <WorkModal
@@ -98,7 +99,6 @@ function Home() {
         <section className="home-contact">
           <h2>つながる</h2>
           <p>ご連絡・お問い合わせはこちらから</p>
-          <Link className="text-link" to="/contact">つながる</Link>
         </section>
       </section>
     </main>

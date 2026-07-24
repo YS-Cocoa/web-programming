@@ -7,7 +7,7 @@ function Footer() {
     <footer className="site-footer">
       <img className="footer-cloud" src={footerCloudImage} alt="" />
       <div className="footer-main">
-        <p className="footer-brand">よしかのひみつきち</p>
+        <Link className="footer-brand" to="/">よしかのひみつきち</Link>
         <nav aria-label="フッターナビゲーション">
           {navItems.map((item) => (
             <Link key={item.to} to={item.to}>

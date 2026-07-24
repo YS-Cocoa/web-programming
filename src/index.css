@@ -22,6 +22,8 @@
   --fs-body-pc: 16px;
   --fs-body-mobile: 16px;
   --fs-body-small-pc: 15px;
+  --fs-intro-pc: 18px;
+  --fs-intro-mobile: 17px;
   --fs-caption-pc: 12px;
   --fs-caption-mobile: 12px;
   --fs-label-pc: 13px;
@@ -68,5 +70,6 @@ img {
 @media (max-width: 860px) {
   html {
     scroll-padding-top: 190px;
+    background: var(--color-surface);
   }
 }
