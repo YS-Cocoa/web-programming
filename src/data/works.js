@@ -29,6 +29,7 @@ export const works = [
     id: 'kosendo',
     title: '光染堂',
     category: 'プロジェクト成果物',
+    featured: true,
     meta: 'モノづくり / まるごと祭2025',
     summary: 'サイアノタイプを使い、当日撮影した写真を青写真として手ぬぐいに残す企画。',
     details: {
@@ -69,6 +70,7 @@ export const works = [
     id: 'function-art',
     title: '関数アート',
     category: '授業成果物',
+    featured: true,
     meta: '数学 / アート',
     summary: '一次関数と微分積分を使い、キャラクターや浮世絵を数式で描いた作品。',
     details: {
@@ -95,6 +97,7 @@ export const works = [
     id: 'shinobue',
     title: '篠笛',
     category: 'ボランティア活動',
+    featured: true,
     meta: '篠笛・獅子舞',
     summary: '祭り囃子の篠笛と獅子舞を学び、地域の秋祭りへ参加している活動。',
     details: {
@@ -133,9 +136,25 @@ export const works = [
     },
   },
   {
+    id: 'blackboard-art',
+    title: '黒板アート',
+    category: 'クライアントワーク',
+    featured: true,
+    meta: '黒板アート / 依頼制作',
+    summary: '依頼内容に合わせ、黒板という限られた画面へ表現を組み立てた制作。',
+    description: '元タイトル: 黒板アート',
+    details: {
+      background: '依頼者の目的や使用される場所に合わせて、黒板アートを制作した。',
+      role: '要望を確認し、構図や描画方法を検討しながら制作を進めた。',
+      outcome: '依頼内容を黒板上のビジュアルとして形にした。',
+      learning: '自分の表現だけでなく、依頼者の意図や見る人を意識して制作する大切さを学んだ。',
+    },
+  },
+  {
     id: 'waku-internship',
     title: '株式会社WAKUにてインターン',
-    category: 'クライアントワーク',
+    category: 'インターン',
+    featured: true,
     meta: 'インターン',
     summary: '現場での制作と検証を通じて、実装の進め方を学んだ経験。',
     description: '元タイトル: 株式会社WAKUにてインターン',
@@ -178,6 +197,7 @@ export const works = [
     id: 'iss-2025',
     title: 'ISS2025 参加',
     category: 'プログラム参加',
+    featured: true,
     meta: 'シドニー大学 / 文部科学省 / 14日間',
     summary: '国際的な科学プログラムに参加し、研究や交流を通じて視野を広げた経験。',
     description: '元タイトル: Professor Harry Messel International Science School 2025 参加',
@@ -232,11 +252,14 @@ export const works = [
   },
 ];
 
+export const featuredWorks = works.filter((work) => work.featured);
+
 export const workFilters = [
   'すべて',
   '授業成果物',
   'プロジェクト成果物',
   'クライアントワーク',
+  'インターン',
   'ボランティア活動',
   'プログラム参加',
 ];

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import WorkModal from '../components/WorkModal';
-import { works } from '../data/works';
+import { featuredWorks } from '../data/works';
 import { getWorkCover } from '../utils/workImages';
 import cloudImage from '../assets/cloud.png';
 import homeDrawingImage from '../assets/home_drawing.png';
@@ -12,7 +12,7 @@ import portfolioTextImage from '../assets/Yoshika’s Portfolio.svg';
 
 function Home() {
   const [selectedWork, setSelectedWork] = useState(null);
-  const previewWorks = works.slice(0, 5);
+  const previewWorks = featuredWorks;
   const carouselWorks = [...previewWorks, ...previewWorks];
 
   return (

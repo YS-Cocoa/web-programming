@@ -3,17 +3,17 @@ import { useSearchParams } from 'react-router-dom';
 import SectionTitle from '../components/SectionTitle';
 import WorkCard from '../components/WorkCard';
 import WorkModal from '../components/WorkModal';
-import { workFilters, works } from '../data/works';
+import { featuredWorks, workFilters } from '../data/works';
 
 function Journey() {
   const [activeFilter, setActiveFilter] = useState('すべて');
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedWork = works.find((work) => work.id === searchParams.get('work'));
+  const selectedWork = featuredWorks.find((work) => work.id === searchParams.get('work'));
   const filteredWorks = useMemo(
     () =>
       activeFilter === 'すべて'
-        ? works
-        : works.filter((work) => work.category === activeFilter),
+        ? featuredWorks
+        : featuredWorks.filter((work) => work.category === activeFilter),
     [activeFilter],
   );
 

@@ -3,6 +3,7 @@
 主な項目:
 
 - `id`: 画像フォルダ名。`src/assets/works/{id}/` と一致させる
+- `featured`: `true` の作品だけをサイトに表示
 - `title`: カードに出る短いタイトル
 - `category`: フィルター分類
 - `meta`: 補足情報
