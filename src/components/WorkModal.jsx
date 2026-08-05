@@ -4,8 +4,18 @@ import { getWorkImages } from '../utils/workImages';
 const detailLabels = {
   background: '背景',
   role: '役割',
+  process: '制作過程',
+  challenge: '課題と工夫',
   outcome: '成果',
   learning: '学び',
+};
+
+const detailOrder = ['background', 'role', 'process', 'challenge', 'outcome', 'learning'];
+
+const factLabels = {
+  period: '期間',
+  team: '体制',
+  methods: '手法・技術',
 };
 
 function WorkModal({ work, onClose }) {
@@ -13,12 +23,20 @@ function WorkModal({ work, onClose }) {
   const coverImage = workImages[0];
   const detailImages = workImages.slice(1);
   const imagePositions = work.imagePositions ?? {};
+  const imageCaptions = work.imageCaptions ?? {};
   const coverPosition = imagePositions.cover ?? 'center';
-  const detailEntries = Object.entries(work.details ?? {})
-    .filter(([, body]) => body)
-    .map(([key, body]) => ({
-      label: detailLabels[key] ?? key,
+  const factEntries = [
+    { label: '分野・場所', body: work.meta },
+    ...Object.entries(work.facts ?? {}).map(([key, body]) => ({
+      label: factLabels[key] ?? key,
       body,
+    })),
+  ].filter(({ body }) => body);
+  const detailEntries = detailOrder
+    .filter((key) => work.details?.[key])
+    .map((key) => ({
+      label: detailLabels[key] ?? key,
+      body: work.details[key],
     }));
 
   useEffect(() => {
@@ -74,16 +92,29 @@ function WorkModal({ work, onClose }) {
           {work.description && (
             <p className="work-modal-description">{work.description}</p>
           )}
+          {factEntries.length > 0 && (
+            <dl className="work-modal-facts">
+              {factEntries.map((fact) => (
+                <div key={fact.label}>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.body}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
           {detailImages.length > 0 && (
             <div className="work-modal-images" aria-label="作品画像">
               {detailImages.map((imageUrl, index) => (
-                <div className="work-modal-image" key={imageUrl}>
+                <figure className="work-modal-image" key={imageUrl}>
                   <img
                     src={imageUrl}
                     alt={`${work.title} ${index + 2}`}
                     style={{ objectPosition: imagePositions[`image${index + 2}`] ?? 'center' }}
                   />
-                </div>
+                  {imageCaptions[`image${index + 2}`] && (
+                    <figcaption>{imageCaptions[`image${index + 2}`]}</figcaption>
+                  )}
+                </figure>
               ))}
             </div>
           )}

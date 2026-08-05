@@ -1382,12 +1382,21 @@
 }
 
 .work-modal-image {
-  aspect-ratio: 4 / 3;
   display: grid;
-  place-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.work-modal-image img {
+  height: auto;
+  aspect-ratio: 4 / 3;
   background: #d9d9d9;
+}
+
+.work-modal-image figcaption {
   color: var(--color-muted);
-  font-size: var(--fs-body-pc);
+  font-size: var(--fs-caption-pc);
+  line-height: 1.6;
 }
 
 .work-modal-text {
@@ -1419,6 +1428,31 @@
 .work-modal-description {
   color: var(--color-muted);
   font-size: var(--fs-caption-pc);
+}
+
+.work-modal-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0;
+  margin: 18px 0 8px;
+  border-top: 1px solid rgba(31, 41, 51, 0.16);
+  border-bottom: 1px solid rgba(31, 41, 51, 0.16);
+}
+
+.work-modal-facts div {
+  padding: 16px 18px 16px 0;
+}
+
+.work-modal-facts dt {
+  margin-bottom: 6px;
+  color: var(--color-muted);
+  font-size: var(--fs-caption-pc);
+}
+
+.work-modal-facts dd {
+  margin: 0;
+  font-size: var(--fs-body-pc);
+  line-height: 1.6;
 }
 
 .work-modal-details {
@@ -2142,12 +2176,12 @@ textarea:focus-visible {
   }
 
   .work-modal-backdrop {
-    padding: 12px;
+    padding: 86px 12px 12px;
   }
 
   .work-modal {
     width: 100%;
-    max-height: calc(100svh - 24px);
+    max-height: calc(100svh - 98px);
     padding-bottom: 24px;
   }
 
@@ -2177,9 +2211,18 @@ textarea:focus-visible {
 
   .work-modal-summary,
   .work-modal-description,
+  .work-modal-facts dd,
   .work-modal-details dd {
     font-size: var(--fs-body-mobile);
     line-height: 1.85;
+  }
+
+  .work-modal-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .work-modal-facts div {
+    padding-right: 0;
   }
 
   .site-footer {
