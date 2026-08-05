@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -24,6 +24,7 @@ function App() {
   const shellRef = useRef(null);
 
   useEffect(() => {
+    // AI使用: Codexと相談してマウス追従演出を実装し、速度や変形量は動作確認しながら調整した。
     const shell = shellRef.current;
     if (!shell) return undefined;
 
@@ -73,7 +74,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter basename="/web-programming/">
+    <HashRouter>
       <ScrollToTop />
       <div className="portfolio-shell" ref={shellRef}>
         <Header />
@@ -87,7 +88,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

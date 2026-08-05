@@ -19,6 +19,7 @@ const factLabels = {
 };
 
 function WorkModal({ work, onClose }) {
+  // AI使用: Codexを用いて、作品データから事実・画像・詳細を共通表示する構成へ整理した。
   const workImages = getWorkImages(work.id).slice(0, 3);
   const coverImage = workImages[0];
   const detailImages = workImages.slice(1);

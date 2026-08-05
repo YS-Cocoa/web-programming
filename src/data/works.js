@@ -1,3 +1,4 @@
+// AI使用: インタビュー内容の整理と文章の推敲にCodexを使用し、事実関係と表現は本人が確認・修正した。
 export const works = [
   {
     id: 'logo-panel',
