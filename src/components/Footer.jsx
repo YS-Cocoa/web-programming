@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { navItems } from '../data/navItems';
-import footerCloudImage from '../assets/cloud_footer.png';
+import footerCloudImage from '../assets/cloud_footer.webp';
 
 function Footer() {
   return (

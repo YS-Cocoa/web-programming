@@ -607,8 +607,8 @@
 /* Reference layout pass */
 .portfolio-shell {
   background:
-    url("./assets/cloud.png") left 120px / 300px auto no-repeat,
-    url("./assets/cloud.png") right 560px / 340px auto no-repeat,
+    url("./assets/cloud.webp") left 120px / 300px auto no-repeat,
+    url("./assets/cloud.webp") right 560px / 340px auto no-repeat,
     var(--color-base);
 }
 
@@ -982,7 +982,7 @@
   z-index: 0;
   width: min(860px, 65vw);
   aspect-ratio: 2447 / 997;
-  background: url("./assets/cloud.png") center / contain no-repeat;
+  background: url("./assets/cloud.webp") center / contain no-repeat;
   pointer-events: none;
 }
 
@@ -1480,8 +1480,8 @@
 @media (max-width: 860px) {
   .portfolio-shell {
     background:
-      url("./assets/cloud.png") left 210px / 250px auto no-repeat,
-      url("./assets/cloud_footer.png") right bottom / 360px auto no-repeat,
+      url("./assets/cloud.webp") left 210px / 250px auto no-repeat,
+      url("./assets/cloud_footer.webp") right bottom / 360px auto no-repeat,
       var(--color-base);
   }
 
