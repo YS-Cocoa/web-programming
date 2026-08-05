@@ -666,39 +666,37 @@
 }
 
 .hero-logo {
-  --portfolio-text-size: 180px;
-  --portfolio-text-x: 105px;
-  --portfolio-text-y: -90px;
   position: relative;
   z-index: 1;
-  width: 300px;
-  height: 300px;
+  width: 390px;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 390 / 330;
   display: grid;
   place-items: center;
-  margin: 54px auto 36px;
+  margin: 24px auto 36px;
   background: transparent;
   overflow: visible;
 }
 
 .hero-logo-mark {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  left: 11.538%;
+  top: 9.091%;
+  width: 76.923%;
+  height: 90.909%;
   border-radius: 50%;
   object-fit: contain;
 }
 
 .hero-logo-text {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: var(--portfolio-text-size);
-  height: var(--portfolio-text-size);
+  left: 53.846%;
+  top: 0;
+  width: 46.154%;
+  height: 54.545%;
   object-fit: contain;
   pointer-events: none;
-  transform: translate(
-    calc(-50% + var(--portfolio-text-x)),
-    calc(-50% + var(--portfolio-text-y))
-  );
 }
 
 .hero-title {
@@ -1946,10 +1944,14 @@ textarea:focus-visible {
     line-height: 1.4;
   }
 
-  .hero,
+  .hero {
+    width: calc(100% - 32px);
+    padding-inline: 0;
+  }
+
   .page-section,
   .philosophy.page-section {
-    width: calc(100% - 32px);
+    width: calc(100% - 48px);
     padding-inline: 0;
   }
 
@@ -1961,12 +1963,9 @@ textarea:focus-visible {
   }
 
   .hero-logo {
-    --portfolio-text-size: 104px;
-    --portfolio-text-x: 62px;
-    --portfolio-text-y: -52px;
-    width: clamp(160px, 48vw, 210px);
-    height: clamp(160px, 48vw, 210px);
-    margin: 38px auto 28px;
+    width: clamp(208px, 60vw, 286px);
+    height: auto;
+    margin: 27px auto 28px;
   }
 
   .hero-title-top,
