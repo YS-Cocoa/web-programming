@@ -965,9 +965,10 @@
 
 .home-contact {
   display: grid;
-  grid-template-columns: max-content minmax(0, 1fr);
-  align-items: start;
-  gap: 80px;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  justify-content: start;
+  gap: 36px;
   min-height: 400px;
   margin-top: 130px;
   margin-bottom: 0;
@@ -995,7 +996,9 @@
 
 .home-contact .text-link {
   align-self: center;
+  justify-self: start;
   width: fit-content;
+  margin-top: 0;
   font-size: var(--fs-body-pc);
 }
 
