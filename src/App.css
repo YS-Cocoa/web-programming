@@ -987,9 +987,16 @@
 }
 
 .home-contact h2,
-.home-contact p {
+.home-contact p,
+.home-contact .text-link {
   position: relative;
   z-index: 1;
+}
+
+.home-contact .text-link {
+  align-self: center;
+  width: fit-content;
+  font-size: var(--fs-body-pc);
 }
 
 .page-section {
@@ -2047,7 +2054,8 @@ textarea:focus-visible {
   }
 
   .home-feature .text-link,
-  .home-note .text-link {
+  .home-note .text-link,
+  .home-contact .text-link {
     font-size: var(--fs-body-mobile);
   }
 

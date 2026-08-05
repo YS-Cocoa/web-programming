@@ -98,7 +98,7 @@ function Home() {
 
         <section className="home-contact">
           <h2>つながる</h2>
-          <p>ご連絡・お問い合わせはこちらから</p>
+          <Link className="text-link" to="/contact">ご連絡・お問い合わせはこちらから</Link>
         </section>
       </section>
     </main>
