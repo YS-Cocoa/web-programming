@@ -159,6 +159,12 @@
   font-size: var(--fs-value-initial-pc);
 }
 
+.hero-ready .hero-title,
+.hero-ready .hero-copy {
+  animation: none;
+  filter: none;
+}
+
 .hero h1 {
   margin-top: 18px;
   font-size: var(--fs-hero-pc);
@@ -333,6 +339,15 @@
 .work-modal-image:has(img) {
   padding: 0;
   overflow: hidden;
+}
+
+.work-thumb:has(img) {
+  position: relative;
+}
+
+.work-thumb img {
+  position: absolute;
+  inset: 0;
 }
 
 .work-card h3 {
@@ -702,7 +717,9 @@
 .hero-title {
   display: block;
   filter: blur(8px);
-  animation: heroFocus 1s ease-out 0.15s forwards;
+  animation:
+    heroFocus 1s ease-out 0.15s forwards,
+    heroRelease 0s linear 1.15s forwards;
 }
 
 .hero-title-top {
@@ -720,7 +737,9 @@
 .hero-copy {
   font-size: var(--fs-hero-pc);
   filter: blur(8px);
-  animation: heroFocus 1s ease-out 0.15s forwards;
+  animation:
+    heroFocus 1s ease-out 0.15s forwards,
+    heroRelease 0s linear 1.15s forwards;
 }
 
 .hero-copy-top {
@@ -747,8 +766,18 @@
 }
 
 @keyframes heroFocus {
-  to {
+  99% {
     filter: blur(0);
+  }
+
+  100% {
+    filter: none;
+  }
+}
+
+@keyframes heroRelease {
+  to {
+    filter: none;
   }
 }
 
@@ -1035,6 +1064,30 @@
   font-size: var(--fs-section-title-pc);
 }
 
+.about-traits {
+  display: grid;
+  margin-top: 14px;
+  border-top: 1px solid rgba(34, 48, 59, 0.24);
+}
+
+.about-traits section {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 28px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(34, 48, 59, 0.24);
+}
+
+.about-traits h4,
+.about-traits p {
+  margin: 0;
+}
+
+.about-traits h4 {
+  font-size: var(--fs-body-pc);
+  line-height: 2;
+}
+
 .career-section {
   width: 100%;
   margin: 42px 0 0;
@@ -1083,6 +1136,9 @@
 }
 
 .career-work-link {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
   color: inherit;
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
@@ -1310,11 +1366,18 @@
   box-shadow: 0 24px 70px rgba(11, 68, 146, 0.22);
 }
 
+.work-modal-close-dock {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  height: 72px;
+  margin-bottom: -72px;
+}
+
 .work-modal-close {
   position: absolute;
   top: 18px;
   right: 18px;
-  z-index: 2;
   width: 36px;
   height: 36px;
   border: 0;
@@ -1324,6 +1387,22 @@
   font-size: 24px;
   line-height: 1;
   cursor: pointer;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .work-modal-close {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  .work-modal-close-dock:hover .work-modal-close,
+  .work-modal-close:focus-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .work-modal-cover {
@@ -1382,17 +1461,21 @@
   line-height: 1.45;
 }
 
-.work-modal-images {
+.work-modal-story {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: 20px;
+  gap: 14px;
+  margin-top: 12px;
 }
 
 .work-modal-image {
   display: grid;
   gap: 8px;
-  margin: 0;
+  width: min(88%, 720px);
+  margin: 22px 0;
+}
+
+.work-modal-image-3 {
+  justify-self: end;
 }
 
 .work-modal-image img {
@@ -1466,7 +1549,7 @@
 .work-modal-details {
   display: grid;
   gap: 14px;
-  margin: 12px 0 0;
+  margin: 0;
 }
 
 .work-modal-details div {
@@ -1733,9 +1816,9 @@
     padding: 26px 22px 0;
   }
 
-  .work-modal-images {
-    grid-template-columns: 1fr;
-    gap: 16px;
+  .work-modal-image {
+    width: 100%;
+    margin: 16px 0;
   }
 
   .footer-cloud {
@@ -1849,17 +1932,23 @@ textarea:focus-visible {
 }
 
 @media (max-width: 860px) {
+  .portfolio-shell {
+    min-height: 100dvh;
+  }
+
   .portfolio-shell::before {
     display: none;
   }
 
   .portfolio-shell main {
-    padding-top: 84px;
+    padding-top: calc(84px + env(safe-area-inset-top, 0px));
   }
 
   .site-header {
-    top: 10px;
-    width: calc(100% - 20px);
+    top: calc(10px + env(safe-area-inset-top, 0px));
+    width: calc(
+      100% - 20px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)
+    );
     height: 64px;
     min-height: 64px;
     margin: 0;
@@ -2080,7 +2169,7 @@ textarea:focus-visible {
   }
 
   .profile-photo {
-    width: min(100%, 420px);
+    width: min(100%, 360px);
     margin-inline: auto;
   }
 
@@ -2094,6 +2183,17 @@ textarea:focus-visible {
     font-size: 20px;
     line-height: 1.6;
     overflow-wrap: anywhere;
+  }
+
+  .about-traits section {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 16px 0;
+  }
+
+  .about-traits h4 {
+    font-size: var(--fs-body-mobile);
+    line-height: 1.9;
   }
 
   .career-section {
@@ -2186,12 +2286,18 @@ textarea:focus-visible {
   }
 
   .work-modal-backdrop {
-    padding: 86px 12px 12px;
+    padding:
+      calc(86px + env(safe-area-inset-top, 0px))
+      calc(12px + env(safe-area-inset-right, 0px))
+      calc(12px + env(safe-area-inset-bottom, 0px))
+      calc(12px + env(safe-area-inset-left, 0px));
   }
 
   .work-modal {
     width: 100%;
-    max-height: calc(100svh - 98px);
+    max-height: calc(
+      100dvh - 98px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)
+    );
     padding-bottom: 24px;
   }
 
@@ -2236,8 +2342,17 @@ textarea:focus-visible {
   }
 
   .site-footer {
-    height: 200px;
-    padding: 24px 20px 20px;
+    height: calc(200px + env(safe-area-inset-bottom, 0px));
+    padding:
+      24px
+      calc(20px + env(safe-area-inset-right, 0px))
+      calc(20px + env(safe-area-inset-bottom, 0px))
+      calc(20px + env(safe-area-inset-left, 0px));
+  }
+
+  .site-footer small {
+    right: calc(20px + env(safe-area-inset-right, 0px));
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   }
 
   .site-footer .footer-brand {
@@ -2251,6 +2366,51 @@ textarea:focus-visible {
   .site-footer nav a {
     font-size: 14px;
     line-height: 1.5;
+  }
+}
+
+/* AI使用: Codexと相談して、iPadと小型スマホの情報密度を端末幅に合わせて調整した。 */
+@media (min-width: 600px) and (max-width: 860px) {
+  .journey .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 56px 32px;
+  }
+
+  .journey .work-card,
+  .journey .work-card:nth-child(odd),
+  .journey .work-card:nth-child(even) {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .journey .work-card:nth-child(even) {
+    margin-top: 64px;
+  }
+}
+
+@media (max-width: 340px) {
+  .filter-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .filter-row::before {
+    grid-column: 1 / -1;
+  }
+
+  .filter-row button {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 3px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .filter-row button:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: calc(50% - 4px);
+    justify-self: center;
   }
 }
 
@@ -2275,6 +2435,19 @@ textarea:focus-visible {
     right: 14px;
     max-width: calc(100% - 28px);
     font-size: 9px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-card-track {
+    gap: 18px;
+    animation-duration: 110s;
+  }
+
+  .work-card.compact {
+    flex: 0 0 min(76vw, 300px);
+    width: min(76vw, 300px);
+    max-width: calc(100vw - 64px);
   }
 }
 

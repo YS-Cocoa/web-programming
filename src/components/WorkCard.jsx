@@ -2,7 +2,7 @@ import { getWorkCover } from '../utils/workImages';
 
 function WorkCard({ work, onSelect }) {
   const coverImage = getWorkCover(work.id);
-  const coverPosition = work.imagePositions?.cover ?? 'center';
+  const coverPosition = work.cardImagePosition ?? work.imagePositions?.cover ?? 'center';
 
   return (
     <button

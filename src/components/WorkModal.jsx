@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { getWorkImages } from '../utils/workImages';
 
 const detailLabels = {
   background: '背景',
   role: '役割',
-  process: '制作過程',
+  process: '取り組みの過程',
   challenge: '課題と工夫',
-  outcome: '成果',
+  outcome: '得られたこと',
   learning: '学び',
 };
 
@@ -16,7 +16,25 @@ const factLabels = {
   period: '期間',
   team: '体制',
   methods: '手法・技術',
+  basis: '受賞基準',
 };
+
+function DetailImage({ imageUrl, imageNumber, imagePositions, imageCaptions, title }) {
+  return (
+    <figure
+      className={`work-modal-image work-modal-image-${imageNumber}`}
+    >
+      <img
+        src={imageUrl}
+        alt={`${title} ${imageNumber}`}
+        style={{ objectPosition: imagePositions[`image${imageNumber}`] ?? 'center' }}
+      />
+      {imageCaptions[`image${imageNumber}`] && (
+        <figcaption>{imageCaptions[`image${imageNumber}`]}</figcaption>
+      )}
+    </figure>
+  );
+}
 
 function WorkModal({ work, onClose }) {
   // AI使用: Codexを用いて、作品データから事実・画像・詳細を共通表示する構成へ整理した。
@@ -36,9 +54,26 @@ function WorkModal({ work, onClose }) {
   const detailEntries = detailOrder
     .filter((key) => work.details?.[key])
     .map((key) => ({
+      key,
       label: detailLabels[key] ?? key,
       body: work.details[key],
     }));
+  const firstImageIndex = Math.max(
+    detailEntries.findIndex(({ key }) => key === 'role'),
+    detailEntries.findIndex(({ key }) => key === 'background'),
+    0,
+  );
+  const secondImagePreferredIndex = detailEntries.findIndex(
+    ({ key }) => key === 'challenge' || key === 'process',
+  );
+  const secondImageIndex = secondImagePreferredIndex >= 0
+    ? secondImagePreferredIndex
+    : Math.max(firstImageIndex, detailEntries.length - 2);
+  const imagePlacements = detailImages.map((imageUrl, index) => ({
+    imageNumber: index + 2,
+    imageUrl,
+    afterDetailIndex: index === 0 ? firstImageIndex : secondImageIndex,
+  }));
 
   useEffect(() => {
     const closeOnEscape = (event) => {
@@ -69,14 +104,16 @@ function WorkModal({ work, onClose }) {
         onClick={(event) => event.stopPropagation()}
         role="dialog"
       >
-        <button
-          aria-label="閉じる"
-          className="work-modal-close"
-          onClick={onClose}
-          type="button"
-        >
-          ×
-        </button>
+        <div className="work-modal-close-dock">
+          <button
+            aria-label="閉じる"
+            className="work-modal-close"
+            onClick={onClose}
+            type="button"
+          >
+            ×
+          </button>
+        </div>
         <div className="work-modal-cover">
           {coverImage ? (
             <img src={coverImage} alt="" style={{ objectPosition: coverPosition }} />
@@ -103,31 +140,41 @@ function WorkModal({ work, onClose }) {
               ))}
             </dl>
           )}
-          {detailImages.length > 0 && (
-            <div className="work-modal-images" aria-label="作品画像">
-              {detailImages.map((imageUrl, index) => (
-                <figure className="work-modal-image" key={imageUrl}>
-                  <img
-                    src={imageUrl}
-                    alt={`${work.title} ${index + 2}`}
-                    style={{ objectPosition: imagePositions[`image${index + 2}`] ?? 'center' }}
-                  />
-                  {imageCaptions[`image${index + 2}`] && (
-                    <figcaption>{imageCaptions[`image${index + 2}`]}</figcaption>
-                  )}
-                </figure>
+          {(detailEntries.length > 0 || detailImages.length > 0) && (
+            <div className="work-modal-story">
+              {detailEntries.map((detail, detailIndex) => (
+                <Fragment key={detail.key}>
+                  <dl className="work-modal-details">
+                    <div>
+                      <dt>{detail.label}</dt>
+                      <dd>{detail.body}</dd>
+                    </div>
+                  </dl>
+                  {imagePlacements
+                    .filter(({ afterDetailIndex }) => afterDetailIndex === detailIndex)
+                    .map((image) => (
+                      <DetailImage
+                        imageCaptions={imageCaptions}
+                        imageNumber={image.imageNumber}
+                        imagePositions={imagePositions}
+                        imageUrl={image.imageUrl}
+                        key={image.imageUrl}
+                        title={work.title}
+                      />
+                    ))}
+                </Fragment>
+              ))}
+              {detailEntries.length === 0 && imagePlacements.map((image) => (
+                <DetailImage
+                  imageCaptions={imageCaptions}
+                  imageNumber={image.imageNumber}
+                  imagePositions={imagePositions}
+                  imageUrl={image.imageUrl}
+                  key={image.imageUrl}
+                  title={work.title}
+                />
               ))}
             </div>
-          )}
-          {detailEntries.length > 0 && (
-            <dl className="work-modal-details">
-              {detailEntries.map((detail) => (
-                <div key={detail.label}>
-                  <dt>{detail.label}</dt>
-                  <dd>{detail.body}</dd>
-                </div>
-              ))}
-            </dl>
           )}
         </div>
       </article>

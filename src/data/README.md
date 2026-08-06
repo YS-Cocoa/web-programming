@@ -3,7 +3,8 @@
 主な項目:
 
 - `id`: 画像フォルダ名。`src/assets/works/{id}/` と一致させる
-- `featured`: `true` の作品だけをサイトに表示
+- `featured`: `true` の作品をHOMEのカルーセルと探究の旅路に表示
+- 探究の旅路には、`featured` の作品に加えてプロフィール経歴の `workId` から参照される作品を表示
 - `title`: カードに出る短いタイトル
 - `category`: フィルター分類
 - `meta`: 補足情報
@@ -14,9 +15,9 @@
 - `description`: 元タイトルや補足説明
 - `details.background`: 背景
 - `details.role`: 自分の役割
-- `details.process`: 制作・活動の過程
+- `details.process`: 取り組みの過程
 - `details.challenge`: 課題と工夫
-- `details.outcome`: 成果
+- `details.outcome`: 得られたこと
 - `details.learning`: 学び
 - `imageCaptions.image2`: 2枚目画像の説明
 - `imageCaptions.image3`: 3枚目画像の説明

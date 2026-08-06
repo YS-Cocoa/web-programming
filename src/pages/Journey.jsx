@@ -3,17 +3,29 @@ import { useSearchParams } from 'react-router-dom';
 import SectionTitle from '../components/SectionTitle';
 import WorkCard from '../components/WorkCard';
 import WorkModal from '../components/WorkModal';
-import { featuredWorks, workFilters } from '../data/works';
+import { profileCareer } from '../data/profile';
+import { works, workFilters } from '../data/works';
+
+const careerWorkIds = new Set(
+  profileCareer.map((item) => item.workId).filter(Boolean),
+);
+const journeyWorks = works.filter(
+  (work) => work.featured || careerWorkIds.has(work.id),
+);
+const availableFilters = workFilters.filter(
+  (filter) =>
+    filter === 'すべて' || journeyWorks.some((work) => work.category === filter),
+);
 
 function Journey() {
   const [activeFilter, setActiveFilter] = useState('すべて');
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedWork = featuredWorks.find((work) => work.id === searchParams.get('work'));
+  const selectedWork = works.find((work) => work.id === searchParams.get('work'));
   const filteredWorks = useMemo(
     () =>
       activeFilter === 'すべて'
-        ? featuredWorks
-        : featuredWorks.filter((work) => work.category === activeFilter),
+        ? journeyWorks
+        : journeyWorks.filter((work) => work.category === activeFilter),
     [activeFilter],
   );
 
@@ -38,7 +50,7 @@ function Journey() {
           lead="よしかが、これまで作ってきたモノを紹介します。"
         />
         <div className="filter-row" aria-label="作品ジャンル">
-          {workFilters.map((filter) => (
+          {availableFilters.map((filter) => (
             <button
               className={filter === activeFilter ? 'active' : ''}
               key={filter}
@@ -52,7 +64,7 @@ function Journey() {
         <div className="work-grid">
           {filteredWorks.map((work) => (
             <WorkCard
-              key={work.title}
+              key={work.id}
               onSelect={openWork}
               work={work}
             />
