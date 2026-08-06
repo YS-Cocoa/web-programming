@@ -272,6 +272,10 @@ export const works = [
       methods: '大学・企業訪問、ミーティング同席、現地エンジニアとの対話',
       basis: '学年GPAが最も高かった学生に贈られるAcademic Starを受賞',
     },
+    imageCaptions: {
+      image2: 'ナパバレーで訪問したワイナリー「Merus」の外観。',
+      image3: 'シリコンバレー渡航へ出発する空港で、本田さんと参加者で撮影した一枚。',
+    },
     summary: '学内アワードの副賞としてシリコンバレーを訪問し、現地の文化や技術に触れた経験。',
     details: {
       background: 'KAMIYAMA AWARD ACADEMIC STARの受賞をきっかけに、シリコンバレーを訪問した。',
@@ -327,6 +331,10 @@ export const works = [
         url: 'https://www.firstinspires.org/programs/frc/',
       },
     ],
+    imageCaptions: {
+      image2: 'FRC Midwest Regionalの会場。競技開始前のステージ周辺の様子。',
+      image3: 'ロボット内部の配線と電源系統。バッテリー電圧を確認しながら安全管理を行った。',
+    },
     summary: 'ロボット開発の支援と安全管理を担い、シカゴ大会では改善過程の記録と説明を担当。',
     details: {
       background: 'FRCチームHanabiの一員として大会前の神山開発合宿に参加し、米国イリノイ州アーリントンハイツで開催されたFRC Midwest Regionalへ出場した。',
@@ -345,6 +353,10 @@ export const works = [
     facts: {
       period: '10日間',
       methods: '施設訪問・折り紙交流・即興事業ピッチ・現地交流',
+    },
+    imageCaptions: {
+      image2: 'コルカタで訪れた書店。壁一面に本が積み重なる空間で、現地の文化に触れた。',
+      image3: '移動中の車窓から見た、夕暮れの街並み。',
     },
     summary: 'コルカタとデリーで、教育・映画・起業に関わる施設や地域文化に触れた10日間。',
     details: {
