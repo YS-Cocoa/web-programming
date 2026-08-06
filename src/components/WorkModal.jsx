@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { getWorkImages } from '../utils/workImages';
 
 const detailLabels = {
@@ -38,6 +38,7 @@ function DetailImage({ imageUrl, imageNumber, imagePositions, imageCaptions, tit
 
 function WorkModal({ work, onClose }) {
   // AI使用: Codexを用いて、作品データから事実・画像・詳細を共通表示する構成へ整理した。
+  const [isScrolled, setIsScrolled] = useState(false);
   const workImages = getWorkImages(work.id).slice(0, 3);
   const coverImage = workImages[0];
   const detailImages = workImages.slice(1);
@@ -100,8 +101,9 @@ function WorkModal({ work, onClose }) {
       <article
         aria-labelledby="work-modal-title"
         aria-modal="true"
-        className="work-modal"
+        className={`work-modal${isScrolled ? ' is-scrolled' : ''}`}
         onClick={(event) => event.stopPropagation()}
+        onScroll={(event) => setIsScrolled(event.currentTarget.scrollTop > 48)}
         role="dialog"
       >
         <div className="work-modal-close-dock">
@@ -111,7 +113,7 @@ function WorkModal({ work, onClose }) {
             onClick={onClose}
             type="button"
           >
-            ×
+            <span aria-hidden="true" />
           </button>
         </div>
         <div className="work-modal-cover">
@@ -175,6 +177,29 @@ function WorkModal({ work, onClose }) {
                 />
               ))}
             </div>
+          )}
+          {work.relatedLinks?.length > 0 && (
+            <section
+              aria-labelledby={`work-modal-links-${work.id}`}
+              className="work-modal-links"
+            >
+              <h4 id={`work-modal-links-${work.id}`}>関連リンク</h4>
+              <ul>
+                {work.relatedLinks.map((link) => (
+                  <li key={link.url}>
+                    <a
+                      aria-label={`${link.label}（新しいタブで開く）`}
+                      href={link.url}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <span>{link.label}</span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
           )}
         </div>
       </article>

@@ -24,6 +24,7 @@
 - `imagePositions.cover`: カバー画像の切り取り位置
 - `imagePositions.image2`: 2枚目画像の切り取り位置
 - `imagePositions.image3`: 3枚目画像の切り取り位置
+- `relatedLinks`: ポップアップ末尾に出す公式・関連URL（`label` / `url`）
 
 `details` は空欄なら画面に出ません。
 

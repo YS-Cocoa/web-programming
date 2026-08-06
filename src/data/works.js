@@ -41,6 +41,12 @@ export const works = [
       image2: 'まるごと祭2025の本番で販売した、サイアノタイプのポストカード。',
       image3: '2025年10月25日・26日の本番展示。制作した手ぬぐいと光染堂の展示パネルを並べた。',
     },
+    relatedLinks: [
+      {
+        label: 'まるごと祭2025 公式サイト',
+        url: 'https://2025.marugotosai.jp/contents/class/kosendo/',
+      },
+    ],
     cardImagePosition: 'center 45%',
     summary: '光で青く発色する写真技法を使い、来場者の写真を手ぬぐいに残した企画。',
     details: {
@@ -219,6 +225,19 @@ export const works = [
       image2: '本社が岡山にあった時期に研究施設を見学。WAKUFULと、社内で進めていた栽培実験について説明を受けた。',
     },
     cardImagePosition: 'center 35%',
+    imagePositions: {
+      cover: 'center 15%',
+    },
+    relatedLinks: [
+      {
+        label: '株式会社WAKU 公式サイト',
+        url: 'https://wakuwakudriven.com/',
+      },
+      {
+        label: 'WAKUブログ「一般コラム」',
+        url: 'https://wakuwakudriven.com/blog/category/article',
+      },
+    ],
     summary: '植物の生育を支えるバイオ企業で、海外事例の調査と科学記事の執筆に取り組むインターン。',
     details: {
       background: '植物の生育や環境への耐性を助ける資材「バイオスティミュラント」を扱う株式会社WAKUで活動した。中学2年生の時にイベントでCEOと出会い、直接インターンへ誘っていただいたことをきっかけに、以降本社を何度も訪れている。',
@@ -276,6 +295,12 @@ export const works = [
     imageCaptions: {
       image2: '生物学系ラボで、安全に処理された水生生物の寄生虫標本を顕微鏡で観察した。',
     },
+    relatedLinks: [
+      {
+        label: 'International Science School 公式ページ（シドニー大学）',
+        url: 'https://www.sydney.edu.au/science/industry-and-community/community-engagement/international-science-school.html',
+      },
+    ],
     summary: 'シドニー大学で先端科学の講義・実験・ワークショップに参加し、世界中の学生と学んだ14日間。',
     details: {
       background: 'サイエンス全般に関心があり、シドニー大学で先端科学の講義やワークショップを体験できる点に魅力を感じ、Professor Harry Messel International Science School 2025へ応募した。',
@@ -296,6 +321,12 @@ export const works = [
       team: 'FRCチームHanabi・ロボット開発部門副リーダー',
       methods: 'モーターテスト・バッテリー安全管理・開発記録',
     },
+    relatedLinks: [
+      {
+        label: 'FIRST Robotics Competition 公式ページ',
+        url: 'https://www.firstinspires.org/programs/frc/',
+      },
+    ],
     summary: 'ロボット開発の支援と安全管理を担い、シカゴ大会では改善過程の記録と説明を担当。',
     details: {
       background: 'FRCチームHanabiの一員として大会前の神山開発合宿に参加し、米国イリノイ州アーリントンハイツで開催されたFRC Midwest Regionalへ出場した。',
