@@ -669,7 +669,10 @@
 }
 
 .hero {
-  --hero-title-scale: 0.94;
+  --hero-title-top-width: clamp(318.56px, calc(184.1px + 34.476vw), 680.56px);
+  --hero-title-main-width: clamp(417.94px, calc(241.33px + 45.286vw), 893.94px);
+  --hero-logo-width: clamp(182.55px, calc(105.51px + 19.756vw), 390px);
+  --hero-main-shift: clamp(0px, calc(-167.55px + 19.483vw), 113px);
   min-height: 0;
   padding: 14px 60px 40px;
 }
@@ -683,7 +686,7 @@
 .hero-logo {
   position: relative;
   z-index: 1;
-  width: 390px;
+  width: var(--hero-logo-width);
   max-width: 100%;
   height: auto;
   aspect-ratio: 390 / 330;
@@ -723,15 +726,16 @@
 }
 
 .hero-title-top {
-  width: calc(724px * var(--hero-title-scale));
+  width: var(--hero-title-top-width);
   max-width: 100%;
   height: auto;
 }
 
 .hero-title-main {
-  width: calc(1196px * var(--hero-title-scale));
+  width: var(--hero-title-main-width);
   max-width: 100%;
   height: auto;
+  transform: translateX(var(--hero-main-shift));
 }
 
 .hero-copy {
@@ -1721,7 +1725,6 @@
   }
 
   .hero {
-    --hero-title-scale: 0.42;
     min-height: 760px;
     padding-top: 72px;
   }
@@ -2117,14 +2120,13 @@ textarea:focus-visible {
   }
 
   .hero {
-    --hero-title-scale: 0.48;
     min-height: 0;
     padding-top: 40px;
     padding-bottom: 40px;
   }
 
   .hero-logo {
-    width: clamp(208px, 60vw, 286px);
+    width: var(--hero-logo-width);
     height: auto;
     margin: 27px auto 28px;
   }
@@ -2478,10 +2480,6 @@ textarea:focus-visible {
 }
 
 @media (max-width: 430px) {
-  .hero {
-    --hero-title-scale: 0.44;
-  }
-
   .hero-logo {
     margin-top: 30px;
   }

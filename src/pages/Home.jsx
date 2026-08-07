@@ -7,7 +7,7 @@ import cloudImage from '../assets/cloud.webp';
 import homeDrawingImage from '../assets/home_drawing.webp';
 import logoImage from '../assets/logo.png';
 import title1Image from '../assets/title1.svg';
-import title2Image from '../assets/title2.svg';
+import title2Image from '../assets/title2-responsive.svg';
 import portfolioTextImage from '../assets/Yoshika’s Portfolio.svg';
 
 function Home() {
@@ -33,6 +33,7 @@ function Home() {
           <img className="hero-logo-text" src={portfolioTextImage} alt="Yoshika's Portfolio" />
         </div>
         <h1 className="hero-main-title">
+          {/* AI使用: Codexと相談して、SVGの余白と画面幅ごとの比率を調整した。 */}
           <img className="hero-title hero-title-main" src={title2Image} alt="世界基準で没頭する" />
         </h1>
         <div className="scroll-cue" aria-hidden="true" />
